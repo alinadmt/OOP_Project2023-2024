@@ -8,6 +8,10 @@ class Location {
 };
 
 
+class Event {
+
+};
+
 
 
 
