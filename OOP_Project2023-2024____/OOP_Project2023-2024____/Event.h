@@ -4,7 +4,7 @@
 using namespace std;
 
 
-enum class EventType{CONCERT, FOOTBALL, THEATER, CONFERENCE, WEBINAR, MOVIE, STANDUP};
+enum class EventType { CONCERT, FOOTBALL, THEATER, CONFERENCE, WEBINAR, MOVIE, STANDUP };
 
 
 class Util {
@@ -126,9 +126,6 @@ public:
 	//setter ticketsSold:
 
 
-
-
-
 	void setEventID(int eventID) {
 		if (eventID < 0) {
 			throw exception("ID should be positive!");
@@ -137,18 +134,48 @@ public:
 	}
 
 	//default ctor
-	Event() :eventName("No name"), eventTime(00), maxTickets(9999), eventID(1), eventType(EventType::MOVIE) {
-		this->setDate("00/00/0000");
-		//this->setTicketsSold(0);
-		Event::ticketsSold += 1;
+	Event() {
+
+	}
+
+	//ctor with parameters
+	Event(const string& name, const char* eventDate, const string& time, int maxTix, EventType type, int id)
+		: eventName(name), maxTickets(maxTix), eventType(type), eventID(id) {
+
+		if (strlen(eventDate) != 10) {                         		// Validate and set date
+			throw exception("Wrong date");
+		}
+		if (eventDate[2] != '/' || eventDate[5] != '/') {
+			throw exception("Wrong date format");
+		}
+		strcpy_s(date, eventDate);
+
+		
+		if (time.empty()) {                                        		// Set event time
+			throw exception("Time cannot be empty!");
+		}
+		eventTime = time;
 	}
 
 	//destructor
 	~Event() {
-		delete[] this->date;
-		Event::ticketsSold -= 1;
+		cout << endl << "Destructor";
+		delete[] Util::copyString(date);
 	}
 
-
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
