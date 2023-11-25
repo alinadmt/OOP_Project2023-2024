@@ -33,6 +33,10 @@ int main() {
 	cout << endl << "The date of the event is: " << event2.getDate();
 	cout << endl << "The time of the event is: " << event2.getEventTime();
 	cout << endl << "The no of max tickets of the event is: " << event2.getMaxTickets();
+	cout << endl;
+
+	event2.ticketsRemained(100);
+
 
 
 	time_t current_time = time(NULL);

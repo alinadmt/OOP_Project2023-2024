@@ -276,6 +276,21 @@ public:
 		}
 
 
+	//tickets left method
+	void ticketsRemained(int ticketsSold) {
+		if (ticketsSold < maxTickets) {
+			cout<<"This is the number of unsold tickets: "<<(maxTickets - ticketsSold);
+		}
+		else if (ticketsSold == maxTickets) {
+			cout<< "No more tickets available";
+		}
+		else  {
+			cout << "Error! Tickets sold must be <= Max no of tickets";
+		}
+
+	}
+
+
 	//destructor
 	~Event() {
 		cout << endl << "Destructor";
