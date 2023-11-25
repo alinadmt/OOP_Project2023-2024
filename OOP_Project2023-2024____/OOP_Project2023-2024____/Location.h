@@ -6,7 +6,7 @@ using namespace std;
 
 class Location {
 private:
-	const int noSeats=1000;
+	const int noSeats=1;
 	int noRows = 0;
 	int noZones = 0;
 	int* seatsPerRow = nullptr;
@@ -30,12 +30,10 @@ public:
 	}
 
 	int* getSeatsPerRow() {
-		int* copy = new int[this->noSeats];
-		for (int i = 0; i < this->noSeats; i++) {
-			copy[i] = this->seatsPerRow[i];
-		}
+		int* copy = new int[noSeats];
+		memcpy(copy, seatsPerRow, sizeof(int) * noSeats);
 		return copy;
-	}
+		}
 
 	int getNoOfTotalSeats() {
 		return this->noOfTotalSeats;
@@ -97,6 +95,13 @@ public:
 	//default ctor
 
 	Location() {
+		delete[] this->seatsPerRow;
+		this->seatsPerRow=new int[1];
+		this->seatsPerRow[0] = 10;
+		this->noRows = 0;
+		this->noZones = 0;
+		this->noOfTotalSeats = 0;
+		this->locationName = "";
 	
 	}
 
