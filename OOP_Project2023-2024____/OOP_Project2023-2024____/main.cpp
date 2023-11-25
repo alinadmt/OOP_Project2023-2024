@@ -63,16 +63,64 @@ int main() {
 	Location location1;
 	location1.getLocationName();
 	location1.getNoOfTotalSeats();
-	location1.getNoRows();
-	location1.getNoSeats();
+
+	location1.setNoRows(20);
+	cout<<endl<<"The number of rows is: "<<location1.getNoRows();
+
+	location1.setNoZones(5);
+	cout << endl << "There are " << location1.getNoSeats() << " zones";
 	location1.getNoZones();
 	location1.getSeatsPerRow();
+	cout << endl << location1;
 
-	
+	Location location2;
+	//cin >> location2;
+	location2 = ++location2;
+	location2 = location2 + 2;
+	cout << endl << location2;
 
-	////TESTING THE DESTRUCTOR
-	//{
-	//	Event event2("Miami Beach 2", "13-12-2023", "12:43", 400, EventType::MOVIE, 1);
-	//}
+	Location location3;
+	location3.addSeat(3);
+	location3.print();
+
+	cout << location3;
+
+	cout << endl << endl << endl << "______________________________________________________________";
+	cout << endl;
+
+	Ticket ticket1;
+	ticket1.setTicketID(1);
+	cout << endl << ticket1.getTicketID();
+
+	ticket1.setTicketType("VIP");
+	cout << endl << ticket1.getTicketType();
+	ticket1.getisValid();
+	ticket1.getPrice();
+	ticket1.getRow();
+	ticket1.getSeatNo();
+	cout << endl;
+
+	Ticket ticket2;
+	//cin >> ticket2;
+	ticket2 = ++ticket2;
+	ticket2 = --ticket2;
+	cout << endl << ticket2;
+
+	//index operator
+	cout << endl << "Feb sales data is " << ticket2[1];
+	ticket2[0] = 50;
+	cout << event2;
+
+
+	Ticket ticket3;
+	float avgTicketsSold = ticket3.calculateMeanTicketsSoldPerMonth();
+	cout << "Mean Tickets sold per month: " << avgTicketsSold << endl;
+
+	ticket3.setPrice(20);
+	float priceWithVAT, priceWithoutVAT;
+	ticket3.calcTicketVAT(priceWithVAT, priceWithoutVAT);
+	cout << "Price with VAT: " << priceWithVAT <<endl;
+	cout << "Price without VAT: " << priceWithoutVAT <<endl;
+	return 0;
 
 }

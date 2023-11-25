@@ -115,6 +115,112 @@ public:
 		}
 	}
 
+	friend ostream& operator<<(ostream& os, const Location& location) {
+		os << "No of seats: " << location.noSeats << "\n";
+		os << "No of rows: " << location.noRows << "\n";
+		os << "No of zones: " << location.noZones << "\n";
+		os << "No of seats per row: " << location.seatsPerRow << "\n";
+		os << "No of total seats: " << location.noOfTotalSeats << "\n";
+		os << "Location name is: " << location.locationName << "\n";
+		return os;
+	}
+
+	// Overload >> (input)
+	friend istream& operator>>(istream& is, Location& location) {
+
+		cout << "Enter the number of rows: ";
+		is >> location.noRows;
+
+		cout << "Enter the number of zones: ";
+		is >> location.noZones;
+
+		int size;
+		cout << "Enter the number of seats per row: ";
+		is >> size;
+		location.seatsPerRow = new int[size];
+		cout << "Enter the seats per row (space-separated): ";
+		for (int i = 0; i < size; ++i) {
+			is >> location.seatsPerRow[i];
+		}
+
+		cout << "Enter the number of total seats: ";
+		is >> location.noOfTotalSeats;
+
+		cout << "Enter the name of the location: ";
+		is >> location.locationName;
+
+		return is;
+	}
+
+	Location& operator++() {
+		if (Location::noRows < noOfTotalSeats) {
+			++Location::noRows;
+		}
+		return *this;
+	}
+
+	// Overload + (addition)
+	Location& operator+(int noZones) {
+		if (Location::noRows * noZones <= noOfTotalSeats) {
+			Location::noRows += noZones;
+		}
+		return *this;
+	}
+
+	// Overload - (subtraction)
+	Location& operator-(int numTickets) {
+		if (Location::noRows - noZones >= 0) {
+			Location::noRows -= noZones;
+		}
+		return *this;
+	}
+
+	Location& operator=(const Location& other) {
+		if (this != &other) {
+			delete[] seatsPerRow;
+		}
+		noRows = other.noRows;
+		noZones = other.noZones;
+		seatsPerRow = new int[noSeats];
+		memcpy(seatsPerRow, other.seatsPerRow, sizeof(int) * noSeats);
+		noOfTotalSeats = other.noOfTotalSeats;
+		locationName = other.locationName;
+
+		return *this;
+	}
+
+	//method to add a seat per row
+	void addSeat(int seat) {
+		int* newArray = new int[this->noOfTotalSeats + 1];                     
+		for (int i = 0; i < this->noOfTotalSeats; i++) {
+			newArray[i] = this->seatsPerRow[i];
+		}
+		newArray[this->noOfTotalSeats] = seat;               
+		this->noOfTotalSeats += 1;                           
+		if (this->seatsPerRow != nullptr) {           
+			delete[] this->seatsPerRow;
+		}
+		this->seatsPerRow = newArray;
+	}
+
+	//print method
+	void print() {
+		cout << endl << "Seats for " << this->locationName << ": ";
+		for (int i = 0; i < this->noOfTotalSeats; i++) {
+			cout << this->seatsPerRow[i] << " ";
+		}
+	}
+
+
+	string getName() {
+		return this->locationName;
+	}
+
+	int getNoGrades() {
+		return this->noOfTotalSeats;
+	}
+
+
 	// Destructor
 	~Location() {
 		cout << endl << "Destructor";
